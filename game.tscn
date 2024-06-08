@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cjsb18di4hqnr"]
 
-[ext_resource type="Material" uid="uid://cco06wfvoig7" path="res://new_shader_material.tres" id="1_vfu6a"]
-[ext_resource type="PackedScene" uid="uid://dp0fn7cpdiv88" path="res://boat.tscn" id="2_b85wa"]
+[ext_resource type="Material" uid="uid://cco06wfvoig7" path="res://Materials/new_shader_material.tres" id="1_vfu6a"]
+[ext_resource type="PackedScene" uid="uid://dp0fn7cpdiv88" path="res://Boats/PoorManBoat/boat.tscn" id="2_b85wa"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_aaxer"]
 lightmap_size_hint = Vector2i(7, 7)
@@ -23,7 +23,9 @@ transform = Transform3D(-0.999359, 3.7229e-09, 0.0358065, 0.0265525, 0.670893, 0
 light_energy = 2.067
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.388513, 0.921443, 0, -0.921443, 0.388513, 0, 1.21334, 0.406369)
+transform = Transform3D(1, 0, 0, 0, 0.867566, 0.497322, 0, -0.497322, 0.867566, 0, 1.1979, 1.6972)
+projection = 1
+size = 2.0
 
 [node name="Boat" parent="." instance=ExtResource("2_b85wa")]
-transform = Transform3D(-3.0598e-09, 0, 0.07, 0, 0.07, 0, -0.07, 0, -3.0598e-09, 0, -0.00305647, 0)
+transform = Transform3D(-3.0598e-09, 0, 0.07, 0, 0.07, 0, -0.07, 0, -3.0598e-09, -0.144982, -0.00305647, 0.158262)

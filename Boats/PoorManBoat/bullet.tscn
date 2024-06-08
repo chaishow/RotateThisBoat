@@ -1,0 +1,89 @@
+[gd_scene load_steps=15 format=3 uid="uid://bvxruynai1vl8"]
+
+[ext_resource type="Script" path="res://Boats/PoorManBoat/bullet.gd" id="1_hv35o"]
+[ext_resource type="Texture2D" uid="uid://b8x4ye1xwyljq" path="res://Materials/Circular_01-128x128.png" id="1_oijs4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7ns5u"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2ydn7"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0vp7m"]
+noise = SubResource("FastNoiseLite_2ydn7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0ifg"]
+albedo_color = Color(0.154876, 0.154876, 0.154876, 1)
+metallic = 1.0
+metallic_texture = SubResource("NoiseTexture2D_0vp7m")
+
+[sub_resource type="SphereMesh" id="SphereMesh_k02j2"]
+material = SubResource("StandardMaterial3D_c0ifg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ju7mg"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_oijs4")
+
+[sub_resource type="Curve" id="Curve_n1nwu"]
+_data = [Vector2(0, 0.879121), 0.0, 0.0, 0, 0, Vector2(0.985507, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ts5pd"]
+_data = [Vector2(0, 0.340659), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_e6qwg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0659341), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_tqog0"]
+curve_x = SubResource("Curve_n1nwu")
+curve_y = SubResource("Curve_ts5pd")
+curve_z = SubResource("Curve_e6qwg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2mhp5"]
+particle_flag_align_y = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.8
+scale_curve = SubResource("CurveXYZTexture_tqog0")
+color = Color(5, 2, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_4f8ib"]
+size = Vector2(0.1, 0.1)
+
+[node name="Bullet" type="Area3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+script = ExtResource("1_hv35o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_7ns5u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_k02j2")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.013172, 3.00224e-09, -0.0991287, -0.0990752, -0.00328586, -0.0131649, -0.00325723, 0.099946, -0.000432811, -0.0540419, 0.213869, -0.0640274)
+material_override = SubResource("StandardMaterial3D_ju7mg")
+emitting = false
+amount = 20
+lifetime = 0.6
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+fixed_fps = 60
+visibility_aabb = AABB(-14.9526, -20.8088, -22.0274, 29.4022, 44.9839, 43.7286)
+process_material = SubResource("ParticleProcessMaterial_2mhp5")
+draw_pass_1 = SubResource("QuadMesh_4f8ib")
+
+[node name="VisibleOnScreenEnabler3D" type="VisibleOnScreenEnabler3D" parent="."]
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler3D" to="." method="_on_visible_on_screen_enabler_3d_screen_exited"]

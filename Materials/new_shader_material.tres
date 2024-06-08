@@ -1,0 +1,35 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cco06wfvoig7"]
+
+[ext_resource type="Shader" path="res://Materials/new_shader_material.gdshader" id="1_j5j0i"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dpy6v"]
+noise_type = 3
+seed = 10
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_71ncc"]
+seamless = true
+seamless_blend_skirt = 0.5
+as_normal_map = true
+bump_strength = 9.0
+noise = SubResource("FastNoiseLite_dpy6v")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0t665"]
+noise_type = 3
+seed = 10
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sxim3"]
+noise = SubResource("FastNoiseLite_0t665")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_j5j0i")
+shader_parameter/albedo = Color(1.34766e-06, 0.400615, 0.521534, 1)
+shader_parameter/metallic = 0.1
+shader_parameter/roughness = 0.0
+shader_parameter/wave_direction = Vector2(2, 0)
+shader_parameter/wave_direction2 = Vector2(0, 1)
+shader_parameter/time_scale = 0.03
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_71ncc")
+shader_parameter/texture_normal2 = SubResource("NoiseTexture2D_sxim3")
