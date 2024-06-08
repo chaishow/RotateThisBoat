@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf2bnkje8haqv"]
+
+[ext_resource type="ArrayMesh" uid="uid://caco3w3ar3j5g" path="res://Lowpoly Boat.obj" id="1_wj4f1"]
+
+[node name="LowpolyBoat" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.367336, 0, 1.33505)
+mesh = ExtResource("1_wj4f1")

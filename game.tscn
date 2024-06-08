@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjsb18di4hqnr"]
+
+[ext_resource type="Material" uid="uid://cco06wfvoig7" path="res://new_shader_material.tres" id="1_vfu6a"]
+[ext_resource type="PackedScene" uid="uid://dp0fn7cpdiv88" path="res://boat.tscn" id="2_b85wa"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_aaxer"]
+lightmap_size_hint = Vector2i(7, 7)
+size = Vector2(10, 10)
+subdivide_width = 200
+subdivide_depth = 200
+orientation = 1
+
+[node name="Game" type="Node3D"]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="WaterPlane" type="MeshInstance3D" parent="World"]
+mesh = SubResource("QuadMesh_aaxer")
+surface_material_override/0 = ExtResource("1_vfu6a")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.999359, 3.7229e-09, 0.0358065, 0.0265525, 0.670893, 0.741079, -0.0240223, 0.741554, -0.670463, 0, 1.93567, -3.23866)
+light_energy = 2.067
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.388513, 0.921443, 0, -0.921443, 0.388513, 0, 1.21334, 0.406369)
+
+[node name="Boat" parent="." instance=ExtResource("2_b85wa")]
+transform = Transform3D(-3.0598e-09, 0, 0.07, 0, 0.07, 0, -0.07, 0, -3.0598e-09, 0, -0.00305647, 0)
