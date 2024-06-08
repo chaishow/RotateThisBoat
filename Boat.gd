@@ -9,4 +9,4 @@ func _input(event):
 
 func _physics_process(delta):
 	rotate_y(rotation_speed*delta*direction)
-	
+	print('Чекаем изменения')
