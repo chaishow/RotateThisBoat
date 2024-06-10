@@ -1,9 +1,9 @@
 extends Node3D
 
 @onready var animation_controller = $AnimationPlayer
-
+var vortex
 #Передвижение
-@export var rotation_speed = PI/3
+var rotation_speed 
 var direction = 1
 
 #Атака
@@ -17,6 +17,10 @@ var hp = max_hp
 
 signal damage_recieved
 
+func _ready():
+	vortex = get_tree().get_root().get_node("Game").get_node("World").get_node("Vortex")
+	rotation_speed = vortex.rotation_speed * 1.5
+
 func _input(event):
 	if Input.is_action_just_pressed('ui_accept'):
 		recieve_damage()
@@ -25,7 +29,6 @@ func _input(event):
 
 func _physics_process(delta):
 	move(delta)
-
 
 #Атака
 func shoot():
@@ -36,7 +39,7 @@ func shoot():
 
 func make_bullet():
 	var new_bullet = Bullet.instantiate()
-	new_bullet.transform = $Marker3D.global_transform
+	new_bullet.transform = $BoatBody/Marker3D.global_transform
 	get_tree().get_root().get_node("Game").add_child(new_bullet)
 
 func take_cooldown():
@@ -62,6 +65,5 @@ func move(delta):
 func recieve_damage():
 	if hp > 0:
 		hp -= 1
-	else:
-		hp = 0
-	damage_recieved.emit()
+		damage_recieved.emit()
+	

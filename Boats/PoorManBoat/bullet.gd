@@ -17,3 +17,12 @@ func _process(delta):
 
 func _on_visible_on_screen_enabler_3d_screen_exited():
 	queue_free()
+
+
+
+func _on_area_entered(area):
+	if area.has_node('DamageReciever'):
+		var damage_reciever = area.get_node('DamageReciever')
+		if 'bullet' in damage_reciever.abusers:
+			area.get_parent().recieve_damage()
+			queue_free()

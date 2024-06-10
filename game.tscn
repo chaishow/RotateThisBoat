@@ -1,12 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjsb18di4hqnr"]
+[gd_scene load_steps=11 format=3 uid="uid://cjsb18di4hqnr"]
 
 [ext_resource type="Material" uid="uid://cco06wfvoig7" path="res://Materials/new_shader_material.tres" id="1_vfu6a"]
 [ext_resource type="PackedScene" uid="uid://dp0fn7cpdiv88" path="res://Boats/PoorManBoat/boat.tscn" id="2_b85wa"]
+[ext_resource type="Script" path="res://Vortex.gd" id="2_cmw2o"]
 [ext_resource type="Texture2D" uid="uid://cbv4hxlf6o5qf" path="res://Materials/UITextures/Circle02.png" id="3_l7erf"]
 [ext_resource type="Texture2D" uid="uid://ds1saxaf1jv30" path="res://Materials/UITextures/Circle01.png" id="4_kn8jl"]
 [ext_resource type="Texture2D" uid="uid://jvt4xnn2jxhw" path="res://Materials/UITextures/Icon02.png" id="5_du362"]
 [ext_resource type="Texture2D" uid="uid://fbnwf4dit2gs" path="res://Materials/UITextures/Icon08.png" id="6_8i3p2"]
 [ext_resource type="Script" path="res://CooldownView.gd" id="7_ki2oh"]
+[ext_resource type="PackedScene" uid="uid://b080dv1gjba8h" path="res://obstacle.tscn" id="8_kbwrq"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_aaxer"]
 lightmap_size_hint = Vector2i(7, 7)
@@ -27,13 +29,40 @@ surface_material_override/0 = ExtResource("1_vfu6a")
 transform = Transform3D(-0.999359, 3.7229e-09, 0.0358065, 0.0265525, 0.670893, 0.741079, -0.0240223, 0.741554, -0.670463, 0, 1.93567, -3.23866)
 light_energy = 2.067
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.867566, 0.497322, 0, -0.497322, 0.867566, 0, 1.1979, 1.6972)
-projection = 1
-size = 2.0
+[node name="Vortex" type="Node3D" parent="World"]
+script = ExtResource("2_cmw2o")
+
+[node name="Obstacle3" parent="World/Vortex" instance=ExtResource("8_kbwrq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32449, 0, -2.5238)
+
+[node name="Obstacle4" parent="World/Vortex" instance=ExtResource("8_kbwrq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32449, 0, -2.5238)
+
+[node name="Obstacle5" parent="World/Vortex" instance=ExtResource("8_kbwrq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32449, 0, -2.5238)
+
+[node name="Obstacle6" parent="World/Vortex" instance=ExtResource("8_kbwrq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32449, 0, -2.5238)
+
+[node name="Obstacle7" parent="World/Vortex" instance=ExtResource("8_kbwrq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32449, 0, -2.5238)
+
+[node name="Obstacle8" parent="World/Vortex" instance=ExtResource("8_kbwrq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32449, 0, -2.5238)
+
+[node name="Obstacle9" parent="World/Vortex" instance=ExtResource("8_kbwrq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32449, 0, -2.5238)
+
+[node name="Obstacle10" parent="World/Vortex" instance=ExtResource("8_kbwrq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.32449, 0, -2.5238)
 
 [node name="Boat" parent="." instance=ExtResource("2_b85wa")]
-transform = Transform3D(-3.0598e-09, 0, 0.07, 0, 0.07, 0, -0.07, 0, -3.0598e-09, -0.144982, -0.00305647, 0.158262)
+transform = Transform3D(-3.0598e-09, 0, 0.07, 0, 0.07, 0, -0.07, 0, -3.0598e-09, 0.245291, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.867566, 0.497322, 0, -0.497322, 0.867566, 0.0197201, 1.1979, 1.6972)
+projection = 1
+size = 2.0
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -120,6 +149,10 @@ fill_mode = 4
 texture_progress = ExtResource("4_kn8jl")
 tint_progress = Color(0.408329, 0.408329, 0.408329, 1)
 script = ExtResource("7_ki2oh")
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0235947, 0.999722, 0, -0.999722, 0.0235947, 0, 7.03394, 0)
+current = true
 
 [connection signal="button_up" from="UI/UICointeiner/ChangeDirection" to="Boat" method="_on_change_direction_button_up"]
 [connection signal="button_up" from="UI/UICointeiner/Fire" to="Boat" method="_on_fire_button_up"]
