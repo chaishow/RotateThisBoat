@@ -12,10 +12,14 @@ var Bullet = preload("res://Boats/PoorManBoat/bullet.tscn")
 var attack_on_cooldown = false
 @onready var coolddown_timer = $AtackCooldownTimer
 
+var max_hp = 5
+var hp = max_hp
+
+signal damage_recieved
 
 func _input(event):
 	if Input.is_action_just_pressed('ui_accept'):
-		direction = -direction
+		recieve_damage()
 	if Input.is_action_just_pressed("ui_down"):
 		shoot()
 
@@ -52,3 +56,12 @@ func _on_change_direction_button_up():
 
 func move(delta):
 	rotate_y(rotation_speed*delta*direction)
+	
+
+
+func recieve_damage():
+	if hp > 0:
+		hp -= 1
+	else:
+		hp = 0
+	damage_recieved.emit()

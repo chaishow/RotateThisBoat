@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce6sio23s6gv5"]
+
+[ext_resource type="Texture2D" uid="uid://t0gtm7pbkrs5" path="res://Materials/UITextures/heart.png" id="1_cdjux"]
+
+[node name="Heart" type="TextureRect"]
+custom_minimum_size = Vector2(60, 50)
+texture = ExtResource("1_cdjux")
+expand_mode = 1
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
