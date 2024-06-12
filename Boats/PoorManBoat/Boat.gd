@@ -19,11 +19,11 @@ signal damage_recieved
 
 func _ready():
 	vortex = get_tree().get_root().get_node("Game").get_node("World").get_node("Vortex")
-	rotation_speed = vortex.rotation_speed * 1.5
+	rotation_speed = vortex.rotation_speed * 4
 
 func _input(event):
 	if Input.is_action_just_pressed('ui_accept'):
-		recieve_damage()
+		direction = -direction
 	if Input.is_action_just_pressed("ui_down"):
 		shoot()
 
@@ -39,7 +39,7 @@ func shoot():
 
 func make_bullet():
 	var new_bullet = Bullet.instantiate()
-	new_bullet.transform = $BoatBody/Marker3D.global_transform
+	new_bullet.transform = $Marker3D.global_transform
 	get_tree().get_root().get_node("Game").add_child(new_bullet)
 
 func take_cooldown():

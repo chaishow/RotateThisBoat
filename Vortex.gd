@@ -10,3 +10,5 @@ func _ready():
 
 func _physics_process(delta):
 	rotate_y(rotation_speed*delta)
+
+
